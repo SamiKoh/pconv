@@ -1,0 +1,6 @@
+*.log
+/webtalk
+/RemoteSystemsTempFiles
+/.metadata
+/.sdk
+
