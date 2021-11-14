@@ -11,6 +11,7 @@
 
 #include "power_converter.h"
 #include "settings_ui.h"
+#include "buttons.h"
 
 #include "tasks.h"
 
@@ -27,33 +28,45 @@ static unsigned int ki = 0; // KI to eliminate the steady-state error
 #define PRESCALEVAL 5
 #define TMR_LOADVAL 8000
 
+// read button status
+int task_buttons(void) {
+
+	switch (is_button_pressed()) {
+	case B_MODE:
+		switch_mode();
+		break;
+	case B_PARAMETER:
+		switch_parameter();
+		break;
+	case B_DECREASE:
+		break;
+	case B_INCREASE:
+		break;
+	}
+
+	task[0].TaskExecuted = TRUE;
+	return 0;
+}
 
 // Test tasks /////////////
 
 int run_task1(void) {
-	// read button status, leds, etc...
-	xil_printf("task1\r\n");
-	task[0].TaskExecuted = TRUE;
+	// do something...
+	//xil_printf("task1\r\n");
+	task[1].TaskExecuted = TRUE;
 	return 0;
 }
 
 int run_task2(void) {
 	// do something...
-	xil_printf("task2\r\n");
-	task[1].TaskExecuted = TRUE;
+	//xil_printf("task2\r\n");
+	task[2].TaskExecuted = TRUE;
 	return 0;
 }
 
 int run_task3(void) {
 	// do something...
-	xil_printf("task3\r\n");
-	task[2].TaskExecuted = TRUE;
-	return 0;
-}
-
-int run_task4(void) {
-	// do something...
-	xil_printf("task4\r\n");
+	//xil_printf("task3\r\n");
 	task[3].TaskExecuted = TRUE;
 	return 0;
 }
@@ -65,9 +78,6 @@ int main(void) {
 	// initialize settings user interface
 	init_settings_ui();
 
-	// set all buttons to input state
-	AXI_BTN_TRI |= 0xF;
-
 	init_interrupts(&InterruptControllerInstance);
 	init_timer();
 	init_ticker();
@@ -75,12 +85,15 @@ int main(void) {
 	/////////////////////////////////////
 
 	// Add dynamically tasks to task queue
+	add_task(5, 3, (void *) task_buttons);
 	add_task(2, 4, (void *) run_task1);
-	add_task(50, 3, (void *) run_task2);
-	add_task(100, 2, (void *) run_task3);
-	add_task(200, 3, (void *) run_task4);
+	add_task(100, 2, (void *) run_task2);
+	add_task(200, 3, (void *) run_task3);
 
 	////////////////////////////////////7
+
+	// initialize and enable buttons
+	init_buttons();
 
 	// Main loop
 	for (;;) {
