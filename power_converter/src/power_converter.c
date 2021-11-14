@@ -16,8 +16,8 @@
 #include "tasks.h"
 
 // PID controller ki and kp
-static unsigned int kp = 0; // KP to decrease the rise time
-static unsigned int ki = 0; // KI to eliminate the steady-state error
+unsigned int kp = 0; // KP to decrease the rise time
+unsigned int ki = 0; // KI to eliminate the steady-state error
 
 //////////////////////
 
@@ -39,8 +39,10 @@ int task_buttons(void) {
 		switch_parameter();
 		break;
 	case B_DECREASE:
+		change_parameter_value(OPERATION_DEC, &kp, &ki);
 		break;
 	case B_INCREASE:
+		change_parameter_value(OPERATION_INC, &kp, &ki);
 		break;
 	}
 

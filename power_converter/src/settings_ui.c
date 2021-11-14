@@ -79,9 +79,18 @@ void display_parameter_status() {
 	xil_printf("\r\n");
 }
 
-void change_parameter_value(unsigned int kp, unsigned int ki) {
-	(selected_parameter == KP_PARAM) ?
-			xil_printf("KP value: %d", kp) : xil_printf("KI value: %d", ki);
+void change_parameter_value(uint8_t operation, unsigned int *kp,
+		unsigned int *ki) {
+	if (operating_mode != SETTING_MODE)
+		return; // return if not in setting mode
+
+	if (selected_parameter == KP_PARAM) {
+		(operation == OPERATION_INC) ? (*kp)++ : (*kp)--;
+		xil_printf("KP value: %d\r\n", (*kp));
+	} else if (selected_parameter == KI_PARAM) {
+		(operation == OPERATION_INC) ? (*ki)++ : (*ki)--;
+		xil_printf("KI value: %d\r\n", (*ki));
+	}
 }
 
 void txt_list(uint8_t is_selected, char *txt) {
