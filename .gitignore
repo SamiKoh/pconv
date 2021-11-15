@@ -5,4 +5,5 @@
 /RemoteSystemsTempFiles
 /.metadata
 /.sdk
-
+Debug/
+*.a
