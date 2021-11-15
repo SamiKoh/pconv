@@ -85,10 +85,10 @@ void change_parameter_value(uint8_t operation, unsigned int *kp,
 		return; // return if not in setting mode
 
 	if (selected_parameter == KP_PARAM) {
-		(operation == OPERATION_INC) ? (*kp)++ : (*kp)--;
+		(operation == OPERATION_INC) ? (*kp)++ : (*kp)--; // increase or decrease kp value
 		xil_printf("KP value: %d\r\n", (*kp));
 	} else if (selected_parameter == KI_PARAM) {
-		(operation == OPERATION_INC) ? (*ki)++ : (*ki)--;
+		(operation == OPERATION_INC) ? (*ki)++ : (*ki)--; // increase or decrease ki value
 		xil_printf("KI value: %d\r\n", (*ki));
 	}
 }
