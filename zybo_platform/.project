@@ -3,6 +3,7 @@
 	<name>zybo_platform</name>
 	<comment>Created by SDK v2019.1</comment>
 	<projects>
+		<project>power_converter_bsp</project>
 	</projects>
 	<buildSpec>
 	</buildSpec>
@@ -11,7 +12,7 @@
 	</natures>
 	<filteredResources>
 		<filter>
-			<id>1635917571590</id>
+			<id>1636651097575</id>
 			<name></name>
 			<type>6</type>
 			<matcher>
@@ -20,7 +21,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1635917571591</id>
+			<id>1636651097583</id>
 			<name></name>
 			<type>6</type>
 			<matcher>
@@ -29,7 +30,7 @@
 			</matcher>
 		</filter>
 		<filter>
-			<id>1635917571592</id>
+			<id>1636651097589</id>
 			<name></name>
 			<type>6</type>
 			<matcher>
